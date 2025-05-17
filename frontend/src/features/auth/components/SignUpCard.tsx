@@ -1,3 +1,10 @@
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import { useSignUp } from "@/hooks/mutations/auth/useSIgnUp";
+import { SignUpSchema } from "@/utils/validators/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,11 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-
 import { SignInFlow } from "../types";
-import { useState } from "react";
 
 interface SignUpCardProps {
   setState: (state: SignInFlow) => void;
@@ -22,6 +25,20 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { mutate, isPending } = useSignUp();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const parsed = SignUpSchema.safeParse({ email, password, confirmPassword });
+    if (!parsed.success) {
+      parsed.error.errors.forEach((err) => {
+        toast.error(err.message);
+      });
+      return;
+    }
+    mutate({ email, password });
+  };
 
   return (
     <Card className="w-full h-full p-8">
@@ -33,7 +50,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-5 px-0 pb-0">
-        <form className="space-y-2.5">
+        <form onSubmit={handleSubmit} className="space-y-2.5">
           <Input
             disabled={false}
             value={email}
@@ -59,7 +76,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
             required
           />
           <Button type="submit" className="w-full" size={"lg"} disabled={false}>
-            Continue
+            {isPending ? "Loading" : "Continue"}
           </Button>
         </form>
         <Separator />

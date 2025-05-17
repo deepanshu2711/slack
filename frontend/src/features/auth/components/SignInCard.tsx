@@ -1,3 +1,10 @@
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
+import { useState } from "react";
+
+import { useLogin } from "@/hooks/mutations/auth/useLogin";
+import { SignInSchema } from "@/utils/validators/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,12 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-
 import { SignInFlow } from "../types";
-import { useState } from "react";
-import { useLogin } from "@/hooks/mutations/auth/useLogin";
 
 interface SignInCardProps {
   setState: (state: SignInFlow) => void;
@@ -27,6 +29,13 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const parsed = SignInSchema.safeParse({ email, password });
+    if (!parsed.success) {
+      parsed.error.errors.forEach((err) => {
+        toast.error(err.message);
+      });
+      return;
+    }
     mutate({ email, password });
   };
 

@@ -19,7 +19,7 @@ export const SignIn = async (req: Request, res: Response) => {
       sameSite: "strict",
     });
 
-    successResponse(res, user, "sign in successfully");
+    successResponse(res, user, "sign In successfully");
   } catch (error) {
     if (error instanceof CustomError) {
       return errorResponse(res, error.status, error.message);

@@ -4,13 +4,13 @@ import { toast } from "sonner";
 import { AuthService } from "@/services/authService";
 import { useMutation } from "@tanstack/react-query";
 
-export const useLogin = () => {
+export const useSignUp = () => {
   return useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
-      AuthService.signIn({ email, password }),
+      AuthService.signUp({ email, password }),
 
     onSuccess: () => {
-      toast.success("Sign in successfully");
+      toast.success("Sign up successfully");
     },
 
     onError: (error) => {
