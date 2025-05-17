@@ -13,6 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 
 import { SignInFlow } from "../types";
 import { useState } from "react";
+import { useLogin } from "@/hooks/mutations/auth/useLogin";
 
 interface SignInCardProps {
   setState: (state: SignInFlow) => void;
@@ -21,6 +22,13 @@ interface SignInCardProps {
 export const SignInCard = ({ setState }: SignInCardProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { mutate, isPending } = useLogin();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
 
   return (
     <Card className="w-full h-full p-8">
@@ -32,7 +40,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-5 px-0 pb-0">
-        <form className="space-y-2.5">
+        <form onSubmit={handleSubmit} className="space-y-2.5">
           <Input
             disabled={false}
             value={email}
@@ -50,7 +58,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
             required
           />
           <Button type="submit" className="w-full" size={"lg"} disabled={false}>
-            Continue
+            {isPending ? "Loading" : "Continue"}
           </Button>
         </form>
         <Separator />
