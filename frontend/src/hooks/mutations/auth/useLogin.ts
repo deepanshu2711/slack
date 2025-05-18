@@ -1,15 +1,23 @@
 import { AxiosError } from "axios";
 import { toast } from "sonner";
-
-import { AuthService } from "@/services/authService";
 import { useMutation } from "@tanstack/react-query";
 
+import { AuthService } from "@/services/authService";
+import { useAppDispatch } from "@/redux/hooks";
+import { setCurrentUser } from "@/redux/slices/UserSlice";
+import { useRouter } from "next/navigation";
+
 export const useLogin = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   return useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       AuthService.signIn({ email, password }),
 
-    onSuccess: () => {
+    onSuccess: (data) => {
+      dispatch(setCurrentUser(data.data));
+      router.push("/");
       toast.success("Sign in successfully");
     },
 
