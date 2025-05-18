@@ -1,19 +1,19 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import { CustomError } from "../utils/customError";
-import { errorResponse } from "../utils/responses";
+import { errorResponse, successResponse } from "../utils/responses";
 import { UserService } from "../services/user.service";
 import { CustomRequest } from "../types";
 
-export const getUser = async (req: CustomRequest, res: Response) => {
-  const userId = req.user._id;
+export const getCurrentUser = async (req: Request, res: Response) => {
+  const userId = (req as CustomRequest).user._id;
   try {
     const user = await UserService.getUser(userId);
-    return user;
+    successResponse(res, user, "current user fetched successfully");
   } catch (error) {
     if (error instanceof CustomError) {
-      return errorResponse(res, error.status, error.message);
+      errorResponse(res, error.status, error.message);
     }
-    errorResponse(res, 500, "Something went wrong. Please try again later.");
+    errorResponse(res, 501, "Something went wrong. Please try again later.");
   }
 };

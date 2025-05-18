@@ -1,11 +1,11 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import { CustomRequest } from "../types";
 import { errorResponse } from "../utils/responses";
 
 export const validateToken = (
-  req: CustomRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -15,7 +15,7 @@ export const validateToken = (
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
 
-    req.user = {
+    (req as CustomRequest).user = {
       _id: decoded._id,
       email: decoded.email,
     };
