@@ -10,7 +10,10 @@ export const SignIn = async (req: Request, res: Response) => {
   try {
     const user = await AuthService.SignIn(email, password);
 
-    const token = generateToken({ id: user._id.toString(), email: user.email });
+    const token = generateToken({
+      _id: user._id.toString(),
+      email: user.email,
+    });
 
     res.cookie("slack_token", token, {
       httpOnly: true,
@@ -33,7 +36,10 @@ export const SignUp = async (req: Request, res: Response) => {
   try {
     const user = await AuthService.SignUp(email, password);
 
-    const token = generateToken({ id: user._id.toString(), email: user.email });
+    const token = generateToken({
+      _id: user._id.toString(),
+      email: user.email,
+    });
 
     res.cookie("slack_token", token, {
       httpOnly: true,
