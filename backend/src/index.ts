@@ -7,6 +7,7 @@ dotenv.config();
 import { connectDb } from "./config/db.config";
 import { authRouter } from "./routes/auth.router";
 import { errorHandler } from "./middlewares/errorHandler";
+import { workspaceRouter } from "./routes/workspace.router";
 
 const app = express();
 
@@ -19,7 +20,9 @@ app.use(
 
 app.use(express.json());
 app.use(CookieParser());
+
 app.use("/api/auth", authRouter);
+app.use("/api/workspace", workspaceRouter);
 
 app.use(errorHandler);
 
