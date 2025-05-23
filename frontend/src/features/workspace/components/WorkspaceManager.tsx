@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { CreateWorkspaceModal } from "./CreateWorkspaceModel";
+import { useEffect } from "react";
+
+import { useModal } from "@/hooks/custom/useModal";
+import { CreateWorkspaceModal } from "@/features/workspace/components/CreateWorkspaceModel";
 
 interface WorkspaceModalManagerProps {
   workspaceId: string;
@@ -10,7 +12,7 @@ interface WorkspaceModalManagerProps {
 export const WorkspaceModalManager = ({
   workspaceId,
 }: WorkspaceModalManagerProps) => {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useModal();
 
   useEffect(() => {
     if (workspaceId) {
