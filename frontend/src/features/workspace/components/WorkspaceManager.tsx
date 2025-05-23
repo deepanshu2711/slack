@@ -1,5 +1,7 @@
 "use client";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import { CreateWorkspaceModal } from "./CreateWorkspaceModel";
 
 interface WorkspaceModalManagerProps {
   workspaceId: string;
@@ -8,13 +10,17 @@ interface WorkspaceModalManagerProps {
 export const WorkspaceModalManager = ({
   workspaceId,
 }: WorkspaceModalManagerProps) => {
-  useEffect(() => {
-    if (!workspaceId) {
-      console.log("Open workspace model");
-    } else {
-      console.log("Workspace id exists");
-    }
-  }, [workspaceId]);
+  const [open, setOpen] = useState(false);
 
-  return null;
+  useEffect(() => {
+    if (workspaceId) {
+      console.log("Workspace id exists");
+    } else if (!open) {
+      console.log("Open workspace model");
+
+      setOpen(true);
+    }
+  }, [workspaceId, open, setOpen]);
+
+  return <CreateWorkspaceModal open={open} setOpen={setOpen} />;
 };
