@@ -1,4 +1,5 @@
 import { Workspace } from "../model/workspace.model";
+import { CustomError } from "../utils/customError";
 
 export const WorkspaceService = {
   //NOTE: GET ALL WORKSPACE
@@ -17,6 +18,9 @@ export const WorkspaceService = {
     userId: string;
     joinCode: string;
   }) => {
+    const existingWorkspace = await Workspace.findOne({ userId, name });
+    if (existingWorkspace)
+      throw new CustomError(400, "Workspace with this name already exists");
     const workspace = await Workspace.create({ name, userId, joinCode });
     return workspace;
   },

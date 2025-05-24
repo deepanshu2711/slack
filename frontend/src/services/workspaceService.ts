@@ -1,14 +1,10 @@
 import axiosInstance from "@/lib/axios";
-import { Workspace } from "@/types";
-
-interface GetAllWorkspace {
-  data: Workspace[];
-}
+import { ApiResponse, Workspace } from "@/types";
 
 export const WorkspaceService = {
   //NOTE: GET all workspaces
 
-  getAll: async (token?: string): Promise<GetAllWorkspace> => {
+  getAll: async (token?: string): Promise<ApiResponse<Workspace[]>> => {
     try {
       const headers: Record<string, string> = {};
       if (token) headers.Cookie = `slack_token=${token}`;
@@ -20,6 +16,16 @@ export const WorkspaceService = {
     } catch (error) {
       console.log(error);
       return { data: [] };
+    }
+  },
+
+  create: async (name: string): Promise<ApiResponse<Workspace> | null> => {
+    try {
+      const res = await axiosInstance.post("/workspace", { name });
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      return null;
     }
   },
 };
