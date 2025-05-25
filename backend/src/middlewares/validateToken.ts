@@ -16,8 +16,6 @@ export const validateToken = (
       token = req.headers.cookie?.split("=")[1];
     }
 
-    console.log("token", token);
-
     if (!token) return errorResponse(res, 404, "Unauthorized: no token found");
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;

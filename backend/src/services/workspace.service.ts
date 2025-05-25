@@ -24,4 +24,12 @@ export const WorkspaceService = {
     const workspace = await Workspace.create({ name, userId, joinCode });
     return workspace;
   },
+
+  //NOTE: GET By ID
+
+  getById: async (workspaceId: string) => {
+    const workspace = await Workspace.findById(workspaceId);
+    if (!workspace) throw new CustomError(404, "Workspace not found");
+    return workspace;
+  },
 };

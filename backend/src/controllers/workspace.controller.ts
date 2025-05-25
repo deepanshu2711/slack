@@ -39,3 +39,19 @@ export const createWorkspace = async (
     next(error);
   }
 };
+
+export const getWorkspaceById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const workspace = await WorkspaceService.getById(req.params.id);
+    successResponse(res, workspace, "workspace detials fetched successfully");
+  } catch (error) {
+    if (error instanceof CustomError) {
+      errorResponse(res, error.status, error.message);
+    }
+    next(error);
+  }
+};
