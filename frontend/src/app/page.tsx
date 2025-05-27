@@ -6,8 +6,8 @@ import { WorkspaceModalManager } from "@/features/workspace/components/Workspace
 export default async function Home() {
   const cookieStore = await cookies();
   const token = cookieStore.get("slack_token");
-  const allWorkspaces = await WorkspaceService.getAll(token?.value);
-  const workspaceId = allWorkspaces.data?.[0]?._id;
+  const userWorkspaces = await WorkspaceService.getUserWorkspaces(token?.value);
+  const workspaceId = userWorkspaces.data?.[0]?._id;
 
   return (
     <>

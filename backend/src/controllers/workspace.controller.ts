@@ -21,6 +21,23 @@ export const getAllWorkspaces = async (
   }
 };
 
+export const getUserWorkspaces = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const userId = (req as CustomRequest).user._id;
+    const workspace = await WorkspaceService.getAllUserWorkspaces(userId);
+    successResponse(res, workspace, "User workspaces fetched successfully");
+  } catch (error) {
+    if (error instanceof CustomError) {
+      errorResponse(res, error.status, error.message);
+    }
+    next(error);
+  }
+};
+
 export const createWorkspace = async (
   req: Request,
   res: Response,

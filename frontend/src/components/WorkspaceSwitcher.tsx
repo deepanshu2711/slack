@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useGetWorkspaceDetials } from "@/hooks/queries/workspace/useGetWorkspaceDetials";
-import { useGetAllWorkspace } from "@/hooks/queries/workspace/useGetAllWorkspace";
 import { useModal } from "@/hooks/custom/useModal";
 import { CreateWorkspaceModal } from "@/features/workspace/components/CreateWorkspaceModel";
+import { useGetUserWorkspaces } from "@/hooks/queries/workspace/useGetUserWorkSpaces";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ export const WorkspaceSwitcher = () => {
   const { workspaceId } = useParams();
   const { data: workspace, isLoading: workspaceLoading } =
     useGetWorkspaceDetials(workspaceId as string);
-  const { data: allWorkspaces } = useGetAllWorkspace();
+  const { data: allWorkspaces } = useGetUserWorkspaces();
 
   const filteredWorkspaces = allWorkspaces?.data.filter(
     (item) => item._id !== workspaceId,

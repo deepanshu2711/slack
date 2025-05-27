@@ -19,6 +19,24 @@ export const WorkspaceService = {
     }
   },
 
+  getUserWorkspaces: async (
+    token?: string,
+  ): Promise<ApiResponse<Workspace[]>> => {
+    try {
+      const headers: Record<string, string> = {};
+      if (token) headers.Cookie = `slack_token=${token}`;
+
+      const res = await axiosInstance.get("/workspace/user", {
+        headers,
+      });
+
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      return { data: [] };
+    }
+  },
+
   getById: async (
     workspaceid: string,
     token?: string,

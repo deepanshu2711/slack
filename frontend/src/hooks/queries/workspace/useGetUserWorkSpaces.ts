@@ -6,9 +6,9 @@ interface ResultInterface {
   data: Workspace[];
 }
 
-export const useGetAllWorkspace = () => {
+export const useGetUserWorkspaces = () => {
   return useQuery<ResultInterface>({
-    queryKey: ["workspaces"],
+    queryKey: ["workspaces:user"],
     queryFn: () => WorkspaceService.getUserWorkspaces(),
     staleTime: 6 * 60 * 1000,
   });
