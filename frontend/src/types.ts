@@ -1,3 +1,8 @@
+export const ROLES = {
+  ADMIN: "admin",
+  MEMBER: "member",
+};
+
 export interface ApiResponse<T> {
   data: T;
   message?: string;
@@ -14,4 +19,11 @@ export interface Workspace {
   name: string;
   userId: string;
   joinCode: string;
+}
+
+export interface Member {
+  _id: string;
+  userId: string;
+  workspaceId: string;
+  role: (typeof ROLES)[keyof typeof ROLES];
 }

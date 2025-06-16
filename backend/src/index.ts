@@ -8,6 +8,7 @@ import { connectDb } from "./config/db.config";
 import { authRouter } from "./routes/auth.router";
 import { errorHandler } from "./middlewares/errorHandler";
 import { workspaceRouter } from "./routes/workspace.router";
+import { memberRouter } from "./routes/member.router";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(CookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/workspace", workspaceRouter);
+app.use("/api/member", memberRouter);
 
 app.use(errorHandler);
 
