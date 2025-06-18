@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 import { CustomError } from "../utils/customError";
 import { errorResponse, successResponse } from "../utils/responses";
@@ -15,7 +15,7 @@ export const getAllWorkspaces = async (
 ) => {
   try {
     const workspace = await WorkspaceService.getAll();
-    successResponse(res, workspace, "all workspaces fetched successfuly");
+    successResponse(res, workspace, 'all workspaces fetched successfuly');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);
@@ -32,7 +32,7 @@ export const getUserWorkspaces = async (
   try {
     const userId = (req as CustomRequest).user._id;
     const workspace = await WorkspaceService.getAllUserWorkspaces(userId);
-    successResponse(res, workspace, "User workspaces fetched successfully");
+    successResponse(res, workspace, 'User workspaces fetched successfully');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);
@@ -66,7 +66,7 @@ export const createWorkspace = async (
     }
 
     const workspace = await WorkspaceService.create({ name, userId, joinCode });
-    successResponse(res, workspace, "workspace created successfully");
+    successResponse(res, workspace, 'workspace created successfully');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);
@@ -85,7 +85,7 @@ export const getWorkspaceById = async (
 
     await MemberService.checkMemberExists(userId, req.params.id);
     const workspace = await WorkspaceService.getById(req.params.id);
-    successResponse(res, workspace, "workspace detials fetched successfully");
+    successResponse(res, workspace, 'workspace detials fetched successfully');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);

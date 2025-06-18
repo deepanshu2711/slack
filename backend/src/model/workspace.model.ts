@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const WorkspaceSchema = new mongoose.Schema(
   {
@@ -9,14 +9,14 @@ const WorkspaceSchema = new mongoose.Schema(
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     joinCode: {
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-export const Workspace = mongoose.model("Workspace", WorkspaceSchema);
+export const Workspace = mongoose.model('Workspace', WorkspaceSchema);

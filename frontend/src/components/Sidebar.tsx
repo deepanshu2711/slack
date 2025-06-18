@@ -1,12 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
-import { SidebarButton } from "./SidebarButton";
-import {
-  BellIcon,
-  Home,
-  MessagesSquareIcon,
-  MoreHorizontal,
-} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { WorkspaceSwitcher } from './WorkspaceSwitcher';
+import { SidebarButton } from './SidebarButton';
+import { BellIcon, Home, MessagesSquareIcon, MoreHorizontal } from 'lucide-react';
 
 export const Sidebar = () => {
   return (

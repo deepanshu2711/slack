@@ -1,11 +1,11 @@
-import axiosInstance from "@/lib/axios";
+import axiosInstance from '@/lib/axios';
 
 export const AuthService = {
   //NOTE: Sign in
 
   signIn: async (credentials: { email: string; password: string }) => {
     try {
-      const res = await axiosInstance.post("/auth/login", credentials);
+      const res = await axiosInstance.post('/auth/login', credentials);
       return res.data;
     } catch (error) {
       throw error;
@@ -16,7 +16,7 @@ export const AuthService = {
 
   signUp: async (credentials: { email: string; password: string }) => {
     try {
-      const res = await axiosInstance.post("/auth/signup", credentials);
+      const res = await axiosInstance.post('/auth/signup', credentials);
       return res.data;
     } catch (error) {
       throw error;

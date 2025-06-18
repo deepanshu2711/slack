@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
-import { WorkspaceService } from "@/services/workspaceService";
+import { WorkspaceService } from '@/services/workspaceService';
 
 interface PageProps {
   params: {
@@ -10,7 +10,7 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
   const { workspaceId } = await params;
   const cookieStore = await cookies();
-  const token = cookieStore.get("slack_token");
+  const token = cookieStore.get('slack_token');
 
   const workspace = await WorkspaceService.getById(workspaceId, token?.value);
 

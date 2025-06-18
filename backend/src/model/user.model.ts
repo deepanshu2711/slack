@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
-import { IUser } from "../types";
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import { IUser } from '../types';
 
 const UserSchema = new mongoose.Schema<IUser>(
   {
@@ -19,11 +19,11 @@ const UserSchema = new mongoose.Schema<IUser>(
       select: false,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-UserSchema.pre("save", async function (next) {
-  if (this.isModified("password") && typeof this.password === "string") {
+UserSchema.pre('save', async function (next) {
+  if (this.isModified('password') && typeof this.password === 'string') {
     try {
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(this.password, salt);
@@ -38,4 +38,4 @@ UserSchema.methods.comparePassword = function (userPassword: string) {
   return bcrypt.compare(userPassword, this.password);
 };
 
-export const User = mongoose.model("User", UserSchema);
+export const User = mongoose.model('User', UserSchema);

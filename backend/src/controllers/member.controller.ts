@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 import { MemberService } from "../services/member.service";
 import { ROLES } from "../model/members.model";
@@ -24,7 +24,7 @@ export const addMember = async (
     }
 
     await MemberService.addMember(userId, workspaceId, ROLES.MEMBER);
-    successResponse(res, null, "user added successfully");
+    successResponse(res, null, 'user added successfully');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);
@@ -41,7 +41,7 @@ export const removeMember = async (
   const { userId, workspaceId } = req.body;
   try {
     await MemberService.removeMember(userId, workspaceId);
-    successResponse(res, null, "user remved successfully");
+    successResponse(res, null, 'user remved successfully');
   } catch (error) {
     if (error instanceof CustomError) {
       errorResponse(res, error.status, error.message);
@@ -50,11 +50,7 @@ export const removeMember = async (
   }
 };
 
-export const getCurrentMember = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getCurrentMember = async (req: Request, res: Response, next: NextFunction) => {
   const { workspaceId } = req.params;
   try {
     const member = await MemberService.checkMemberExists(

@@ -1,9 +1,9 @@
-"use client";
-import { Info, Search } from "lucide-react";
-import { useParams } from "next/navigation";
+'use client';
+import { Info, Search } from 'lucide-react';
+import { useParams } from 'next/navigation';
 
-import { Button } from "@/components/ui/button";
-import { useGetWorkspaceDetials } from "@/hooks/queries/workspace/useGetWorkspaceDetials";
+import { Button } from '@/components/ui/button';
+import { useGetWorkspaceDetials } from '@/hooks/queries/workspace/useGetWorkspaceDetials';
 
 export const Toolbar = () => {
   const params = useParams();
@@ -14,7 +14,7 @@ export const Toolbar = () => {
       <div className="flex-1" />
       <div className="min-w-[280px] max-w-[640px] grow-[2] shrink">
         <Button
-          size={"sm"}
+          size={'sm'}
           className="bg-accent/25 hover:bg-accent/25 w-full justify-start h-7 px-2 "
         >
           <Search className="size-4 text-white mr-2" />
@@ -22,7 +22,7 @@ export const Toolbar = () => {
         </Button>
       </div>
       <div className="ml-auto flex-1 flex items-center justify-end">
-        <Button variant={"ghost"} className="hover:bg-accent/10 bg-transparent">
+        <Button variant={'ghost'} className="hover:bg-accent/10 bg-transparent">
           <Info className="size-5 text-white" />
         </Button>
       </div>

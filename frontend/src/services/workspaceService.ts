@@ -1,5 +1,5 @@
-import axiosInstance from "@/lib/axios";
-import { ApiResponse, Workspace } from "@/types";
+import axiosInstance from '@/lib/axios';
+import { ApiResponse, Workspace } from '@/types';
 
 export const WorkspaceService = {
   //NOTE: GET all workspaces
@@ -9,7 +9,7 @@ export const WorkspaceService = {
       const headers: Record<string, string> = {};
       if (token) headers.Cookie = `slack_token=${token}`;
 
-      const res = await axiosInstance.get("/workspace", {
+      const res = await axiosInstance.get('/workspace', {
         headers,
       });
       return res.data;
@@ -19,14 +19,12 @@ export const WorkspaceService = {
     }
   },
 
-  getUserWorkspaces: async (
-    token?: string,
-  ): Promise<ApiResponse<Workspace[]>> => {
+  getUserWorkspaces: async (token?: string): Promise<ApiResponse<Workspace[]>> => {
     try {
       const headers: Record<string, string> = {};
       if (token) headers.Cookie = `slack_token=${token}`;
 
-      const res = await axiosInstance.get("/workspace/user", {
+      const res = await axiosInstance.get('/workspace/user', {
         headers,
       });
 
@@ -37,10 +35,7 @@ export const WorkspaceService = {
     }
   },
 
-  getById: async (
-    workspaceid: string,
-    token?: string,
-  ): Promise<ApiResponse<Workspace> | null> => {
+  getById: async (workspaceid: string, token?: string): Promise<ApiResponse<Workspace> | null> => {
     try {
       const headers: Record<string, string> = {};
       if (token) headers.Cookie = `slack_token=${token}`;
@@ -57,7 +52,7 @@ export const WorkspaceService = {
 
   create: async (name: string): Promise<ApiResponse<Workspace> | null> => {
     try {
-      const res = await axiosInstance.post("/workspace", { name });
+      const res = await axiosInstance.post('/workspace', { name });
       return res.data;
     } catch (error) {
       console.log(error);
