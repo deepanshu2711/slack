@@ -5,14 +5,24 @@ import { ROLES } from "../model/members.model";
 import { CustomError } from "../utils/customError";
 import { errorResponse, successResponse } from "../utils/responses";
 import { CustomRequest } from "../types";
+import { MemberSchemaZ } from "../model/zodSchemas";
 
 export const addMember = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const { userId, workspaceId } = req.body;
   try {
+    const validationResult = MemberSchemaZ.safeParse({ userId, workspaceId });
+    if (!validationResult.success) {
+      const errorMessages = validationResult.error.errors
+        .map((err) => `${err.path.join(".")}: ${err.message}`)
+        .join(", ");
+
+      return errorResponse(res, 400, `Validation failed: ${errorMessages}`);
+    }
+
     await MemberService.addMember(userId, workspaceId, ROLES.MEMBER);
     successResponse(res, null, "user added successfully");
   } catch (error) {
@@ -26,7 +36,7 @@ export const addMember = async (
 export const removeMember = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const { userId, workspaceId } = req.body;
   try {
@@ -47,7 +57,10 @@ export const getCurrentMember = async (
 ) => {
   const { workspaceId } = req.params;
   try {
-    const member = await MemberService.checkMemberExists((req as CustomRequest).user._id, workspaceId);
+    const member = await MemberService.checkMemberExists(
+      (req as CustomRequest).user._id,
+      workspaceId
+    );
     successResponse(res, member, "member found successfully");
   } catch (error) {
     if (error instanceof CustomError) {
@@ -55,4 +68,4 @@ export const getCurrentMember = async (
     }
     next(error);
   }
-}
+};
