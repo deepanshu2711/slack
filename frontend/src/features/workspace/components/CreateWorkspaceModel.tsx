@@ -1,26 +1,23 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Input } from "@/components/ui/input";
-import { ModalForm } from "@/components/ModalForm";
-import { useCreateWorkspace } from "@/hooks/mutations/workspace/useCreateWorksapce";
+import { Input } from '@/components/ui/input';
+import { ModalForm } from '@/components/ModalForm';
+import { useCreateWorkspace } from '@/hooks/mutations/workspace/useCreateWorksapce';
 
 interface CreateWorkspaceModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-export const CreateWorkspaceModal = ({
-  open,
-  setOpen,
-}: CreateWorkspaceModalProps) => {
-  const [name, setName] = useState("");
+export const CreateWorkspaceModal = ({ open, setOpen }: CreateWorkspaceModalProps) => {
+  const [name, setName] = useState('');
   const { mutate, isPending } = useCreateWorkspace();
 
   return (
     <ModalForm
       open={open}
       setOpen={setOpen}
-      title={"Add a workspace"}
+      title={'Add a workspace'}
       loading={isPending}
       onSubmit={() => mutate({ name })}
     >

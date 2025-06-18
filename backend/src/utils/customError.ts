@@ -4,7 +4,7 @@ export class CustomError extends Error {
   constructor(status: number, message: string) {
     super(message);
     this.status = status;
-    this.name = "CustomError";
+    this.name = 'CustomError';
     Error.captureStackTrace(this, this.constructor);
   }
 }

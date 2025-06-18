@@ -1,6 +1,6 @@
-import { Request } from "express";
-import { Model, Types } from "mongoose";
-import { ROLES } from "./model/members.model";
+import { Request } from 'express';
+import { Model, Types } from 'mongoose';
+import { ROLES } from './model/members.model';
 
 export interface IUser extends Document {
   _id: Types.ObjectId;
@@ -20,7 +20,7 @@ export interface IMember extends Document {
 export interface IMemberModel extends Model<IMember> {
   findByUserAndWorkspace(
     userId: Types.ObjectId,
-    workspaceId: Types.ObjectId,
+    workspaceId: Types.ObjectId
   ): Promise<IMember | null>;
 
   ROLES: typeof ROLES;

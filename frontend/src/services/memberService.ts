@@ -1,8 +1,11 @@
-import axiosInstance from "@/lib/axios";
-import { ApiResponse, Member } from "@/types";
+import axiosInstance from '@/lib/axios';
+import { ApiResponse, Member } from '@/types';
 
 export const memberService = {
-  getCurrentMember: async (workspaceId: string, token?: string): Promise<ApiResponse<Member> | null> => {
+  getCurrentMember: async (
+    workspaceId: string,
+    token?: string
+  ): Promise<ApiResponse<Member> | null> => {
     try {
       const headers: Record<string, string> = {};
       if (token) headers.Cookie = `slack_token=${token}`;
@@ -12,8 +15,8 @@ export const memberService = {
       });
       return res.data;
     } catch (error) {
-      console.error("Error fetching current member:", error);
+      console.error('Error fetching current member:', error);
       return null;
     }
-  }
-}
+  },
+};

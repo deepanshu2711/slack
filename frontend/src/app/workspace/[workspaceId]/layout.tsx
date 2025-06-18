@@ -1,9 +1,8 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 
-
-import { Sidebar } from "@/components/Sidebar";
-import { Toolbar } from "@/components/toolbar";
-import { WorkspaceSidebar } from "@/features/workspace/components/WorkspaceSidebar";
+import { Sidebar } from '@/components/Sidebar';
+import { Toolbar } from '@/components/toolbar';
+import { WorkspaceSidebar } from '@/features/workspace/components/WorkspaceSidebar';
 
 interface WorkspaceIdLayoutProps {
   children: React.ReactNode;
@@ -19,9 +18,7 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
             <WorkspaceSidebar />
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel minSize={20}>
-            {children}
-          </ResizablePanel>
+          <ResizablePanel minSize={20}>{children}</ResizablePanel>
         </ResizablePanelGroup>
       </div>
     </div>

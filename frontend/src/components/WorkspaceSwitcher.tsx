@@ -1,30 +1,29 @@
-"use client";
-import { useParams, useRouter } from "next/navigation";
-import { Loader, Plus } from "lucide-react";
+'use client';
+import { useParams, useRouter } from 'next/navigation';
+import { Loader, Plus } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { useGetWorkspaceDetials } from "@/hooks/queries/workspace/useGetWorkspaceDetials";
-import { useModal } from "@/hooks/custom/useModal";
-import { CreateWorkspaceModal } from "@/features/workspace/components/CreateWorkspaceModel";
-import { useGetUserWorkspaces } from "@/hooks/queries/workspace/useGetUserWorkSpaces";
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { useGetWorkspaceDetials } from '@/hooks/queries/workspace/useGetWorkspaceDetials';
+import { useModal } from '@/hooks/custom/useModal';
+import { CreateWorkspaceModal } from '@/features/workspace/components/CreateWorkspaceModel';
+import { useGetUserWorkspaces } from '@/hooks/queries/workspace/useGetUserWorkSpaces';
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
   const { open, setOpen } = useModal();
   const { workspaceId } = useParams();
-  const { data: workspace, isLoading: workspaceLoading } =
-    useGetWorkspaceDetials(workspaceId as string);
+  const { data: workspace, isLoading: workspaceLoading } = useGetWorkspaceDetials(
+    workspaceId as string
+  );
   const { data: allWorkspaces } = useGetUserWorkspaces();
 
-  const filteredWorkspaces = allWorkspaces?.data.filter(
-    (item) => item._id !== workspaceId,
-  );
+  const filteredWorkspaces = allWorkspaces?.data.filter((item) => item._id !== workspaceId);
 
   return (
     <>
@@ -44,9 +43,7 @@ export const WorkspaceSwitcher = () => {
             className="cursor-pointer flex flex-col justify-start items-start capitalize"
           >
             {workspace?.data.name}
-            <span className="text-xs text-muted-foreground">
-              Active Workspace
-            </span>
+            <span className="text-xs text-muted-foreground">Active Workspace</span>
           </DropdownMenuItem>
 
           {filteredWorkspaces?.map((item) => (
@@ -61,10 +58,7 @@ export const WorkspaceSwitcher = () => {
               {item.name}
             </DropdownMenuItem>
           ))}
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={() => setOpen(true)}
-          >
+          <DropdownMenuItem className="cursor-pointer" onClick={() => setOpen(true)}>
             <div className="size-9 relative overflow-hidden bg-[#f2f2f2] text-slate-800 font-semibold text-xl rounded-md flex items-center justify-center mr-2">
               <Plus />
             </div>

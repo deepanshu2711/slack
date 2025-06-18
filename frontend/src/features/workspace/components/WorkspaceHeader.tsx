@@ -1,11 +1,17 @@
-import { Button } from "@/components/ui/button"
-import { DropdownMenuItem, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
-import { Workspace } from "@/types"
-import { ChevronDownIcon, ListFilter, SquarePen } from "lucide-react"
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenuItem,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
+import { Workspace } from '@/types';
+import { ChevronDownIcon, ListFilter, SquarePen } from 'lucide-react';
 
 interface WorkspaceHeaderProps {
-  workspace: Workspace
-  isAdmin: boolean
+  workspace: Workspace;
+  isAdmin: boolean;
 }
 
 export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) => {
@@ -13,7 +19,10 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) =>
     <div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="font-semibold bg-accent/10 hover:bg-accent/20 text-lg w-auto p-1.5 overflow-hidden " size={"sm"}>
+          <Button
+            className="font-semibold bg-accent/10 hover:bg-accent/20 text-lg w-auto p-1.5 overflow-hidden "
+            size={'sm'}
+          >
             <span className="truncate "> {workspace.name}</span>
             <ChevronDownIcon className="size-4 ml-1 shrink-0" />
           </Button>
@@ -28,20 +37,17 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) =>
               <p className="text-xs text-muted-foreground">Active workspace</p>
             </div>
           </DropdownMenuItem>
-          {
-            isAdmin && (
-              <>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
-                  Invite people to {workspace.name}
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
-                  Preferences
-                </DropdownMenuItem>
-              </>
-            )
-          }
-
+          {isAdmin && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => {}}>
+                Invite people to {workspace.name}
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => {}}>
+                Preferences
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="flex items-center gap-0.5">
@@ -53,5 +59,5 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) =>
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};

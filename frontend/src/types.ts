@@ -1,6 +1,6 @@
 export const ROLES = {
-  ADMIN: "admin",
-  MEMBER: "member",
+  ADMIN: 'admin',
+  MEMBER: 'member',
 };
 
 export interface ApiResponse<T> {

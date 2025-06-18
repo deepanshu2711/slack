@@ -1,11 +1,11 @@
-import { AxiosError } from "axios";
-import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from 'axios';
+import { toast } from 'sonner';
+import { useMutation } from '@tanstack/react-query';
 
-import { AuthService } from "@/services/authService";
-import { useAppDispatch } from "@/redux/hooks";
-import { setCurrentUser } from "@/redux/slices/UserSlice";
-import { useRouter } from "next/navigation";
+import { AuthService } from '@/services/authService';
+import { useAppDispatch } from '@/redux/hooks';
+import { setCurrentUser } from '@/redux/slices/UserSlice';
+import { useRouter } from 'next/navigation';
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
@@ -17,14 +17,13 @@ export const useLogin = () => {
 
     onSuccess: (data) => {
       dispatch(setCurrentUser(data.data));
-      router.push("/");
-      toast.success("Sign in successfully");
+      router.push('/');
+      toast.success('Sign in successfully');
     },
 
     onError: (error) => {
       const err = error as AxiosError<{ error: string }>;
-      const message =
-        err.response?.data?.error || err.message || "Login failed";
+      const message = err.response?.data?.error || err.message || 'Login failed';
       toast.error(message);
     },
   });

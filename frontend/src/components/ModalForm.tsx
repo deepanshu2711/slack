@@ -1,10 +1,5 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from './ui/button';
 
 interface ModalWrapperProps {
   open: boolean;
@@ -39,7 +34,7 @@ export const ModalForm = ({
           {children}
           <div className="flex justify-end">
             <Button type="submit" disabled={loading}>
-              {loading ? "Loading..." : "Submit"}
+              {loading ? 'Loading...' : 'Submit'}
             </Button>
           </div>
         </form>

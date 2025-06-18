@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { IMember, IMemberModel } from "../types";
+import mongoose from 'mongoose';
+import { IMember, IMemberModel } from '../types';
 //
 // export const ROLES = Object({
 //   ADMIN: "admin",
@@ -7,8 +7,8 @@ import { IMember, IMemberModel } from "../types";
 // });
 
 export const ROLES = {
-  ADMIN: "admin",
-  MEMBER: "member",
+  ADMIN: 'admin',
+  MEMBER: 'member',
 };
 
 export type RoleType = (typeof ROLES)[keyof typeof ROLES];
@@ -17,12 +17,12 @@ const MemberSchema = new mongoose.Schema<IMember, IMemberModel>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     workspaceId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Workspace",
+      ref: 'Workspace',
       required: true,
     },
     role: {
@@ -31,11 +31,11 @@ const MemberSchema = new mongoose.Schema<IMember, IMemberModel>(
       default: ROLES.MEMBER,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 MemberSchema.methods.isAdmin = function () {
-  return this.role === "admin";
+  return this.role === 'admin';
 };
 
 MemberSchema.statics.findByUserAndWorkspace = function (userId, workspaceId) {
@@ -46,4 +46,4 @@ MemberSchema.index({ userId: 1, workspaceId: 1 }, { unique: true });
 
 export const Member =
   (mongoose.models.Member as IMemberModel) ||
-  mongoose.model<IMember, IMemberModel>("Member", MemberSchema);
+  mongoose.model<IMember, IMemberModel>('Member', MemberSchema);
