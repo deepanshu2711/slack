@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { useModal } from "@/hooks/custom/useModal";
 import { CreateWorkspaceModal } from "@/features/workspace/components/CreateWorkspaceModel";
+import { useRouter } from "next/navigation";
 
 interface WorkspaceModalManagerProps {
   workspaceId: string;
@@ -13,16 +14,15 @@ export const WorkspaceModalManager = ({
   workspaceId,
 }: WorkspaceModalManagerProps) => {
   const { open, setOpen } = useModal();
+  const router = useRouter()
 
   useEffect(() => {
     if (workspaceId) {
-      console.log("Workspace id exists");
+      router.push(`/workspace/${workspaceId}`);
     } else if (!open) {
-      console.log("Open workspace model");
-
       setOpen(true);
     }
-  }, [workspaceId, open, setOpen]);
+  }, [workspaceId, router, open, setOpen]);
 
   return <CreateWorkspaceModal open={open} setOpen={setOpen} />;
 };
