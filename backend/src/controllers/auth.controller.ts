@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
-import { errorResponse, successResponse } from '../utils/responses';
-import { AuthService } from '../services/auth.service';
-import { CustomError } from '../utils/customError';
-import { generateToken } from '../utils/jwt';
+import { errorResponse, successResponse } from "../utils/responses";
+import { AuthService } from "../services/auth.service";
+import { CustomError } from "../utils/customError";
+import { generateToken } from "../utils/jwt";
+import { UserSchemaZ } from "../model/zodSchemas";
 
 export const SignIn = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -34,6 +35,15 @@ export const SignIn = async (req: Request, res: Response) => {
 export const SignUp = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
+    const validationResult = UserSchemaZ.safeParse({ email, password });
+    if (!validationResult.success) {
+      const errorMessages = validationResult.error.errors
+        .map((err) => `${err.path.join(".")}: ${err.message}`)
+        .join(", ");
+
+      return errorResponse(res, 400, `Validation failed: ${errorMessages}`);
+    }
+
     const user = await AuthService.SignUp(email, password);
 
     const token = generateToken({
