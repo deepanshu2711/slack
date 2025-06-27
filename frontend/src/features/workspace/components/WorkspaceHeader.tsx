@@ -1,3 +1,4 @@
+import { Hint } from '@/components/Hint';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenuItem,
@@ -40,10 +41,10 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) =>
           {isAdmin && (
             <>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => {}}>
+              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
                 Invite people to {workspace.name}
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => {}}>
+              <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
                 Preferences
               </DropdownMenuItem>
             </>
@@ -51,12 +52,17 @@ export const WorkspaceHeader = ({ workspace, isAdmin }: WorkspaceHeaderProps) =>
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="flex items-center gap-0.5">
-        <Button variant="default" size="sm" className="text-sm bg-accent/10 hover:bg-accent/20">
-          <ListFilter className="size-4" />
-        </Button>
-        <Button variant="default" size="sm" className="text-sm bg-accent/10 hover:bg-accent/20">
-          <SquarePen className="size-4" />
-        </Button>
+        <Hint label="Filter messages" side="bottom" alignment="start">
+          <Button variant="default" size="sm" className="text-sm bg-accent/10 hover:bg-accent/20">
+            <ListFilter className="size-4" />
+          </Button>
+        </Hint>
+
+        <Hint label="Edit workspace name" side="bottom" alignment="start">
+          <Button variant="default" size="sm" className="text-sm bg-accent/10 hover:bg-accent/20">
+            <SquarePen className="size-4" />
+          </Button>
+        </Hint>
       </div>
     </div>
   );
