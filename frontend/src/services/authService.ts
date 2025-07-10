@@ -22,4 +22,15 @@ export const AuthService = {
       throw error;
     }
   },
+
+  //NOTE: Get current user
+
+  getCurrentUser: async () => {
+    try {
+      const res = await axiosInstance.get('/auth/me');
+      return res.data;
+    } catch (error) {
+      return null;
+    }
+  },
 };
